@@ -6,3 +6,6 @@ import '../sass/app.scss'
 
 //Import JS files
 import './app';
+import './nav';
+import './film';
+import './films';
