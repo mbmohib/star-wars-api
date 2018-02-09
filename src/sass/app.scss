@@ -1,0 +1,15 @@
+//Import SASS files
+@import 'partials/_basic.scss';
+
+
+header {
+    width: 70%;
+    margin: 0 auto;
+    height: 250px;
+
+    h1 {
+        background: white;
+        border-bottom: 2px solid #333;
+        margin-bottom: 20px;
+    }
+}
