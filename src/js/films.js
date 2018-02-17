@@ -31,7 +31,7 @@ getData(filmsUrl).then(({ results }) => {
                     </ul>
                     
                     <div class="card-body">
-                        <a href="./details.html" class="card-link">Details</a>
+                        <a href="#" class="card-link">Details</a>
                     </div>
 
                 </div>
