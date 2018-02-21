@@ -1,5 +1,17 @@
-.card {
-    img {
-        height: 250px;
+.movie-list {
+    .card {
+        width: ((100 / 3) - 1) * 1%;
+        margin-bottom: 20px;
+
+        .media-left {
+
+            .image {
+                background: lighten($primaryColor, 35%);
+                border-radius: 50%;
+                text-align: center;
+                padding-top: 25%;
+            }
+        }
+
     }
 }

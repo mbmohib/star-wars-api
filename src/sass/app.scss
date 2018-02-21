@@ -1,7 +1,26 @@
-//Import SASS files
+/*
+    Bulma Releted Config
+-----------------------------*/
+
+// Import the initial variables
+@import "../../node_modules/bulma/sass/utilities/initial-variables";
+//Modify Bulma variables
+@import './base/_modify-bulma-variables.scss';
+// Import rest of Bulma
+@import "../../node_modules/bulma/bulma.sass";
+
+
+/*
+    Theme Releted Config
+-----------------------------*/
+//Import Base files
 @import './base/_typography.scss';
 @import './base/_colors.scss';
 @import './base/_basic.scss';
+@import './base/_helpers.scss';
 
+//Import Components files
 @import './components/_nav.scss';
 @import './components/_card.scss';
+
+@import './_blog.scss';

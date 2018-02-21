@@ -7,9 +7,9 @@ getData(baseUrl).then(blob => {
 
     const html = Object.entries(blob).map(data => {
         return `
-            <li class="nav-item">
-                <a class="nav-link" href="#">${data[0]}</a>
-            </li>
+            <a class="navbar-item">
+                ${data[0]}
+            </a>
         `
     }).join('');
 

@@ -1,40 +1,46 @@
 import getData from './getData'
 
 const filmsUrl = '../../data/films.json';
-const filmWrapper = document.getElementById('js-film');
+const filmWrapper = document.getElementById('js-films');
 
 getData(filmsUrl).then(({ results }) => {
 
     const html = results.map(({ title, url, release_date, episode_id, director, opening_crawl }) => {
 
         return `
-            <div class="col-4 mb-5">
-                <div class="card">
-                
-                    <img class="card-img-top" src="./src/images/${episode_id}.jpg" alt="Card image cap">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title js-card-title">${title}</h5>
-                        <p class="card-text js-card-description">${opening_crawl}</p>
-                    </div>
-                    
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            Director: ${director}
-                        </li>
-                        <li class="list-group-item">
-                            Released Date: ${release_date}
-                        </li>
-                        <li class="list-group-item">
-                            Episode ID: ${episode_id}
-                        </li>
-                    </ul>
-                    
-                    <div class="card-body">
-                        <a href="#" class="card-link">Details</a>
+            <div class="card">
+        
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                    <img src="./src/images/${episode_id}.jpg" alt="Placeholder image">
+                    </figure>
+                </div>
+
+                <div class="card-content">
+
+                    <div class="media">
+        
+                        <div class="media-content">
+                            <p class="title is-4">${title}</p>
+                            <p class="subtitle is-6">${director}</p>
+                        </div>
+
                     </div>
 
+                    <div class="content">
+                        <p>${opening_crawl.slice(0, 200)}...</p>
+                        <br>
+                        <p>Released Date: ${release_date}</p>
+                        
+                        <p>Episode No: ${episode_id}</p>
+                    </div>
+
+                    <footer class="card-footer js-item-link">
+                        <a data-url="${url}" class="card-footer-item button is-primary">Details</a>
+                    </footer>
+
                 </div>
+
             </div>
         `;
     }).join('');
