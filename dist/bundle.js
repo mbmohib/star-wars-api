@@ -117,8 +117,6 @@ __webpack_require__(6);
 
 __webpack_require__(7);
 
-__webpack_require__(8);
-
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
@@ -133,19 +131,13 @@ __webpack_require__(8);
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -163,10 +155,60 @@ var navItem = document.getElementById('js-nav');
 (0, _getData2.default)(baseUrl).then(function (blob) {
 
     var html = Object.entries(blob).map(function (data) {
-        return '\n            <li class="nav-item">\n                <a class="nav-link" href="#">' + data[0] + '</a>\n            </li>\n        ';
+        return '\n            <a class="navbar-item">\n                ' + data[0] + '\n            </a>\n        ';
     }).join('');
 
     navItem.innerHTML = html;
+});
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _getData = __webpack_require__(0);
+
+var _getData2 = _interopRequireDefault(_getData);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var detailLinks = document.querySelectorAll('.js-item-link');
+var filmsWrapper = document.getElementById('js-films');
+var filmWrapper = document.getElementById('js-film');
+
+document.addEventListener('click', function (event) {
+
+    if (event.target.parentNode.className.includes('js-item-link')) {
+
+        event.preventDefault();
+        filmsWrapper.style.display = 'none';
+
+        var charactersDetails = [];
+        var filmDetails = void 0;
+        var charactersDetailsHtml = void 0;
+
+        (0, _getData2.default)(event.target.dataset.url).then(function (data) {
+
+            filmDetails = data;
+
+            data.characters.map(function (character) {
+
+                (0, _getData2.default)(character).then(function (item) {
+                    charactersDetails.push(item);
+                }).then(function () {
+                    charactersDetailsHtml = charactersDetails.map(function (charactersDetails) {
+                        return '\n                                    <tr>\n                                        <td>' + charactersDetails.name + '</td>\n                                        <td>' + charactersDetails.gender + '</td>\n                                        <td><a href="' + charactersDetails.url + '">Click</a></td>\n                                    </tr>\n                                ';
+                    }).join('');
+                }).then(function () {
+                    var html = '\n                                <div class="columns is-vcentered has-text-centered">\n                                    <div class="column is-5 align-self-flex-start">\n                                        <figure class="image is-4by3">\n                                            <img src="./src/images/' + filmDetails.episode_id + '.jpg" alt="Description">\n                                        </figure>\n                                    </div>\n                                    \n                                    <div class="column is-6 is-offset-1">\n                                        <h1 class="title is-2">\n                                            ' + filmDetails.title + '\n                                        </h1>\n                                        <h2 class="subtitle is-4">\n                                            ' + filmDetails.opening_crawl + '\n                                        </h2>\n                                        <br>\n\n                                        <table class="table">\n                                            <thead>\n                                                <tr>\n                                                    <th>Name</th>\n                                                    <th>Gender</th>\n                                                    <th>Details</th>\n                                                </tr>\n                                            </thead>\n                                            <tbody>\n                                                ' + charactersDetailsHtml + '\n                                            </tbody>\n                                        </table>\n                                    </div>\n\n                                </div>\n                            ';
+
+                    filmWrapper.innerHTML = html;
+                });
+            });
+        });
+    }
 });
 
 /***/ }),
@@ -182,36 +224,8 @@ var _getData2 = _interopRequireDefault(_getData);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var detailLinks = document.querySelectorAll('.card-link');
-var filmWrapper = document.getElementById('js-film');
-
-document.addEventListener('click', function (event) {
-    if (event.target.className === 'card-link') {
-        event.preventDefault();
-        // filmWrapper.style.display = 'none';
-        console.log(event.target.dataset.url);
-
-        (0, _getData2.default)(event.target.dataset.url).then(function (data) {
-            return console.log(data);
-        });
-    }
-});
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _getData = __webpack_require__(0);
-
-var _getData2 = _interopRequireDefault(_getData);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var filmsUrl = '../../data/films.json';
-var filmWrapper = document.getElementById('js-film');
+var filmWrapper = document.getElementById('js-films');
 
 (0, _getData2.default)(filmsUrl).then(function (_ref) {
     var results = _ref.results;
@@ -226,7 +240,7 @@ var filmWrapper = document.getElementById('js-film');
             opening_crawl = _ref2.opening_crawl;
 
 
-        return '\n            <div class="col-4 mb-5">\n                <div class="card">\n                \n                    <img class="card-img-top" src="./src/images/' + episode_id + '.jpg" alt="Card image cap">\n                    \n                    <div class="card-body">\n                        <h5 class="card-title js-card-title">' + title + '</h5>\n                        <p class="card-text js-card-description">' + opening_crawl + '</p>\n                    </div>\n                    \n                    <ul class="list-group list-group-flush">\n                        <li class="list-group-item">\n                            Director: ' + director + '\n                        </li>\n                        <li class="list-group-item">\n                            Released Date: ' + release_date + '\n                        </li>\n                        <li class="list-group-item">\n                            Episode ID: ' + episode_id + '\n                        </li>\n                    </ul>\n                    \n                    <div class="card-body">\n                        <a data-url="' + url + '" class="card-link">Details</a>\n                    </div>\n\n                </div>\n            </div>\n        ';
+        return '\n            <div class="card">\n        \n                <div class="card-image">\n                    <figure class="image is-4by3">\n                    <img src="./src/images/' + episode_id + '.jpg" alt="Placeholder image">\n                    </figure>\n                </div>\n\n                <div class="card-content">\n\n                    <div class="media">\n        \n                        <div class="media-content">\n                            <p class="title is-4">' + title + '</p>\n                            <p class="subtitle is-6">' + director + '</p>\n                        </div>\n\n                    </div>\n\n                    <div class="content">\n                        <p>' + opening_crawl.slice(0, 200) + '...</p>\n                        <br>\n                        <p>Released Date: ' + release_date + '</p>\n                        \n                        <p>Episode No: ' + episode_id + '</p>\n                    </div>\n\n                    <footer class="card-footer js-item-link">\n                        <a data-url="' + url + '" class="card-footer-item button is-primary">Details</a>\n                    </footer>\n\n                </div>\n\n            </div>\n        ';
     }).join('');
 
     filmWrapper.innerHTML = html;
@@ -234,3 +248,4 @@ var filmWrapper = document.getElementById('js-film');
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

@@ -1,0 +1,40 @@
+.movie-details {
+    .title {
+        margin-bottom: 3rem;
+        border-bottom: 1px dashed $quinaryColor;
+        padding-bottom: 1rem;
+        display: inline-block;
+    }
+
+    .tag {
+        border-radius: 50%;
+    }
+
+    .subtitle {
+        p {
+            text-align: left !important;
+            margin-bottom: 1rem;
+
+            em {
+                font-style: normal;
+                font-weight: $highWeight;
+            }
+
+            span {
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .message {
+        font-size: 110%;
+    }
+}
+
+.table {
+    width: 100%;
+
+    td {
+        text-transform: capitalize;
+    }
+}

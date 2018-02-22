@@ -11,7 +11,7 @@
 
 
 /*
-    Theme Releted Config
+    Theme Related Config
 -----------------------------*/
 //Import Base files
 @import './base/_typography.scss';
@@ -21,6 +21,7 @@
 
 //Import Components files
 @import './components/_nav.scss';
-@import './components/_card.scss';
+@import './components/_films.scss';
+@import './components/_film.scss';
 
 @import './_blog.scss';
